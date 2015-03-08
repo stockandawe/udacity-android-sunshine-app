@@ -2,9 +2,11 @@ package com.rutuldave.sunshine.app;
 
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.format.Time;
 import android.util.Log;
@@ -58,14 +60,17 @@ public class ForecastFragment extends Fragment {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-
         // Need to specify country when using zip code
         final String QUERY_COUNTRY = ",USA";
 
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
             FetchWeatherTask weatherTask = new FetchWeatherTask();
-            weatherTask.execute("94105" + QUERY_COUNTRY);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String location = prefs.getString(getString(R.string.pref_location_key),
+                    getString(R.string.pref_location_default));
+
+            weatherTask.execute("\"" + location + "\"" + QUERY_COUNTRY);
             return true;
         }
         return super.onOptionsItemSelected(item);
