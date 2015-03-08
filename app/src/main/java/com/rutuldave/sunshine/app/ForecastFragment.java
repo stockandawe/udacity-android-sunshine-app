@@ -133,6 +133,12 @@ public class ForecastFragment extends Fragment {
         weatherTask.execute("\"" + location + "\"" + QUERY_COUNTRY);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        updateWeather();
+    }
+
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
         private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
