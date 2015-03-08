@@ -74,33 +74,14 @@ public class ForecastFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Dummy data for` ListView
-        ArrayList<String> forecastArray = new ArrayList<String>();
-        forecastArray.add("Today - Sunny - 88/63");
-        forecastArray.add("Tomorrow - Foggy - 70/46");
-        forecastArray.add("Tuesday - Cloudy - 72/63");
-        forecastArray.add("Wednesday - Sunny - 88/63");
-        forecastArray.add("Thursday - Sunny - 88/63");
-
-            /*
-            String[] forecastArray = {
-                    "Today - Sunny - 88/63",
-                    "Tomorrow - Foggy - 70/46",
-                    "Tuesday - Cloudy - 72/63",
-                    "Wednesday - Sunny - 88/63",
-                    "Thursday - Sunny - 88/63"
-            };
-            */
-
-        // Create an ArrayAdapter with the dummy data
-        // ArrayAdapter takes data from a source (forecastArray) and uses
-        // it to populate the ListView it's attached to.
+        // The ArrayAdapter will take data from a source and
+        // use it to populate the ListView it's attached to.
         mForecastAdapter =
                 new ArrayAdapter<String>(
                         getActivity(), // The current context (this activity)
                         R.layout.list_item_forecast, // name of the layout ID.
                         R.id.list_item_forecast_textview, // ID of the TextView to populate.
-                        forecastArray
+                        new ArrayList<String>()
                 );
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
