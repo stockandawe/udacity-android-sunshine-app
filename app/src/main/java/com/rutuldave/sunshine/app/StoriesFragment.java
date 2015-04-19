@@ -108,7 +108,7 @@ public class StoriesFragment extends Fragment {
          * Fortunately parsing is easy:  constructor takes the JSON string and converts it
          * into an Object hierarchy for us.
          */
-        private String[] getWeatherDataFromJson(String storiesJsonStr)
+        private String[] getStoriesDataFromJson(String storiesJsonStr)
                 throws JSONException {
 
             final String OWM_STORY_LIST = "stories";
@@ -200,7 +200,7 @@ public class StoriesFragment extends Fragment {
             }
 
             try {
-                return getWeatherDataFromJson(storiesJsonStr);
+                return getStoriesDataFromJson(storiesJsonStr);
             } catch (JSONException e) {
                 Log.e(LOG_TAG, e.getMessage(), e);
                 e.printStackTrace();
