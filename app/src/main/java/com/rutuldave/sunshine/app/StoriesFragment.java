@@ -46,18 +46,20 @@ public class StoriesFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.storiesfragment, menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        // Need to specify country when using zip code
-        final String QUERY_COUNTRY = ",USA";
-
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
-            FetchWeatherTask weatherTask = new FetchWeatherTask();
-            weatherTask.execute("94105" + QUERY_COUNTRY);
+            FetchStoriesTask storiesTask = new FetchStoriesTask();
+            storiesTask.execute("1");
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -94,9 +96,9 @@ public class StoriesFragment extends Fragment {
         return rootView;
     }
 
-    public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
+    public class FetchStoriesTask extends AsyncTask<String, Void, String[]> {
 
-        private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+        private final String LOG_TAG = FetchStoriesTask.class.getSimpleName();
 
         /* The date/time conversion code is going to be moved outside the asynctask later,
          * so for convenience we're breaking it out into its own method now.
@@ -149,7 +151,15 @@ public class StoriesFragment extends Fragment {
 
             try {
                 // Construct the URL for the OpenWeatherMap query
-                URL url = new URL("https://www.vcdramas.com/api/funds/5/stories?&api_key=a3037caa141c596123e11c04d4638891");
+//                final String STORIES_BASE_URL = "https://www.vcdramas.com/api/funds/";
+//                final String STORIES_APPEND_URL = "/stories?api_key=019f8e79299186e082d09e5a05e90855";
+//
+//                Uri builtUri = Uri.parse(STORIES_BASE_URL).buildUpon()
+//                        .appendPath(params[0])
+//                        .appendPath(STORIES_APPEND_URL)
+//                        .build();
+
+                URL url = new URL("https://www.vcdramas.com/api/funds/1/stories?api_key=019f8e79299186e082d09e5a05e90855");
 
                 // Create the request to OpenWeatherMap, and open the connection
                 urlConnection = (HttpURLConnection) url.openConnection();
