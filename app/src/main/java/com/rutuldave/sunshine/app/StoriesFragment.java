@@ -115,6 +115,7 @@ public class StoriesFragment extends Fragment {
 
             final String OWM_STORY_LIST = "stories";
             final String OWM_STORY_TITLE = "title";
+            final String OWM_STORY_LOCATION = "location";
 
             JSONObject storiesJson = new JSONObject(storiesJsonStr);
 
@@ -123,12 +124,21 @@ public class StoriesFragment extends Fragment {
             String[] resultStrs = new String[storiesArray.length()];
             for(int i = 0; i < storiesArray.length(); i++) {
                 String title;
+                String location;
 
                 JSONObject storyObject = storiesArray.getJSONObject(i);
                 title = storyObject.getString(OWM_STORY_TITLE);
+                location = storyObject.getString(OWM_STORY_LOCATION);
 
-                resultStrs[i] = title;
-                Log.v(LOG_TAG, "Story: " + title);
+                if (location != null) {
+                    resultStrs[i] = title + ", " + location;
+                }
+                else {
+                    resultStrs[i] = title;
+                }
+
+                resultStrs[i] = title + ", " + location;
+                Log.v(LOG_TAG, "Story: " + title + ", " + location);
             }
             return resultStrs;
 
